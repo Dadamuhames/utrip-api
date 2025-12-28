@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: postgres_db
+
+    ports:
+      - "5432:5432"
+
+    environment:
+      POSTGRES_DB: "utrip_db"
+      POSTGRES_USER: "mark"           # Имя суперпользователя
+      POSTGRES_PASSWORD: "root_pass"   # Пароль для суперпользователя
+
+      # Отключение ведения журнала (для тестовых сред)
+      # PGDATA: /var/lib/postgresql/data/pgdata
+
+    # Сохранение данных в томе (для постоянства)
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+    # Политика перезапуска
+    restart: always
+
+# Объявление внешнего тома для сохранения данных
+volumes:
+  postgres_data:
