@@ -17,9 +17,6 @@ public class OtpService {
   private final PasswordEncoder passwordEncoder;
 
   public String createOtp(final Long telegramId, final String phone) {
-
-    System.out.println(phone);
-
     String otp = otpUtils.generateOtp();
 
     otpRepository.findByPhone(phone).ifPresent(otpRepository::delete);
@@ -39,9 +36,7 @@ public class OtpService {
   public OtpEntity getAndValidateOtp(final String otpCode, final String phone) {
     OtpEntity otp = otpRepository.findByPhone(phone).orElse(null);
 
-    if (!isOtpValid(otp, otpCode)) {
-      throw new OtpInvalidException(ErrorCode.OTP_EXPIRED_CODE);
-    }
+    if (!isOtpValid(otp, otpCode)) throw new OtpInvalidException(ErrorCode.OTP_EXPIRED_CODE);
 
     return otp;
   }

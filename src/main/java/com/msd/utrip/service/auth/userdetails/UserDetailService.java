@@ -18,7 +18,7 @@ public class UserDetailService implements CustomUserDetailsService {
     public UserDetails loadUserByUsername(String login) throws UserNotFoundException {
         return userRepository
             .findByPhone(login)
-            .orElseThrow(() -> new UserNotFoundException(ErrorCode.USER_INVALID_CODE));
+            .orElseThrow(() -> new UserNotFoundException(ErrorCode.LOGIN_INVALID_CODE));
     }
 
     @Override

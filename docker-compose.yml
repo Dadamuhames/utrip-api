@@ -10,19 +10,34 @@ services:
 
     environment:
       POSTGRES_DB: "utrip_db"
-      POSTGRES_USER: "mark"           # Имя суперпользователя
-      POSTGRES_PASSWORD: "root_pass"   # Пароль для суперпользователя
+      POSTGRES_USER: "mark"
+      POSTGRES_PASSWORD: "root_pass"
 
-      # Отключение ведения журнала (для тестовых сред)
-      # PGDATA: /var/lib/postgresql/data/pgdata
-
-    # Сохранение данных в томе (для постоянства)
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
-    # Политика перезапуска
     restart: always
+
+  minio:
+    image: minio/minio:latest
+    container_name: minio_server
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      MINIO_ROOT_USER: "minioadmin"
+      MINIO_ROOT_PASSWORD: "minioadmin"
+      MINIO_SERVER_URL: "http://localhost:9000"
+
+    command: server /data --console-address ":9001"
+
+    volumes:
+      - minio_data:/data
+
+    restart: always
+
 
 # Объявление внешнего тома для сохранения данных
 volumes:
-  postgres_data:
+  minio_data: { }
+  postgres_data: { }

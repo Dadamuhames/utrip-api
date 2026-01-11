@@ -1,24 +1,22 @@
 package com.msd.utrip.service.client;
 
 import com.msd.utrip.dto.request.TourFilterRequest;
-import com.msd.utrip.dto.response.ImageDto;
-import com.msd.utrip.dto.response.InclusionDto;
-import com.msd.utrip.dto.response.ScheduleDto;
-import com.msd.utrip.dto.response.TourDetailResponse;
-import com.msd.utrip.dto.response.TourResponse;
-import com.msd.utrip.entity.InclusionEntity;
-import com.msd.utrip.entity.ScheduleEntity;
-import com.msd.utrip.entity.TourEntity;
-import com.msd.utrip.entity.TourImageEntity;
+import com.msd.utrip.dto.response.file.ImageDto;
+import com.msd.utrip.dto.response.tour.InclusionDto;
+import com.msd.utrip.dto.response.tour.ScheduleDto;
+import com.msd.utrip.dto.response.tour.TourDetailResponse;
+import com.msd.utrip.dto.response.tour.TourResponse;
+import com.msd.utrip.entity.tour.TourEntity;
+import com.msd.utrip.entity.tour.TourImageEntity;
 import com.msd.utrip.exception.EntityNotFoundException;
 import com.msd.utrip.exception.TourNotAvailableException;
 import com.msd.utrip.mapper.ImageMapper;
 import com.msd.utrip.mapper.TourMapper;
-import com.msd.utrip.repository.InclusionsRepository;
-import com.msd.utrip.repository.ScheduleRepository;
-import com.msd.utrip.repository.TourFilterRepository;
-import com.msd.utrip.repository.TourImageRepository;
-import com.msd.utrip.repository.TourRepository;
+import com.msd.utrip.repository.tour.InclusionsRepository;
+import com.msd.utrip.repository.tour.ScheduleRepository;
+import com.msd.utrip.repository.tour.TourFilterRepository;
+import com.msd.utrip.repository.tour.TourImageRepository;
+import com.msd.utrip.repository.tour.TourRepository;
 import com.msd.utrip.repository.projection.InclusionProjection;
 import com.msd.utrip.repository.projection.ScheduleProjection;
 import com.msd.utrip.repository.projection.TourDetailProjection;
@@ -30,7 +28,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -73,8 +70,7 @@ public class ClientTourService {
     List<InclusionDto> inclusionList = inclusions.stream().map(tourMapper::mapInclusion).toList();
     List<ScheduleDto> scheduleList = schedules.stream().map(tourMapper::mapSchedule).toList();
 
-//    return tourMapper.projectionToDetailResponse(tour, scheduleList, inclusionList, imageList);
-      return null;
+    return tourMapper.projectionToDetailResponse(tour, scheduleList, inclusionList, imageList);
   }
 
   public TourEntity getActiveTour(final Long id, final Integer personCount) {

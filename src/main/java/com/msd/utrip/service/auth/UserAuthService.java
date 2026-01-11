@@ -1,6 +1,7 @@
 package com.msd.utrip.service.auth;
 
 import com.msd.utrip.constant.enums.ErrorCode;
+import com.msd.utrip.dto.request.PasswordResetRequest;
 import com.msd.utrip.dto.request.UserLoginRequest;
 import com.msd.utrip.dto.request.UserRegisterRequest;
 import com.msd.utrip.dto.response.TokenResponse;
@@ -28,7 +29,7 @@ public class UserAuthService {
 
   @Transactional
   public TokenResponse register(final UserRegisterRequest request) {
-    OtpEntity otpEntity = otpService.getAndValidateOtp(request.otpCode(), request.phone());
+    OtpEntity otpEntity = otpService.getAndValidateOtp(request.code(), request.phone());
 
     UserEntity user = userMapper.mapRequestToUser(request, otpEntity.getTelegramId());
 
@@ -39,16 +40,29 @@ public class UserAuthService {
     return tokenService.createPair(user);
   }
 
+  private UserEntity getUser(final String phone) {
+    return userRepository
+        .findByPhone(phone)
+        .orElseThrow(() -> new UserNotFoundException(ErrorCode.LOGIN_INVALID_CODE));
+  }
+
   public TokenResponse login(final UserLoginRequest request) {
-    UserEntity user =
-        userRepository
-            .findByPhone(request.phone())
-            .orElseThrow(() -> new UserNotFoundException(ErrorCode.USER_INVALID_CODE));
+    UserEntity user = getUser(request.phone());
 
     if (!passwordEncoder.matches(request.password(), user.getPassword())) {
       throw new PasswordInvalidException(ErrorCode.PASSWORD_INVALID_CODE);
     }
 
     return tokenService.createPair(user);
+  }
+
+  public void resetPassword(final PasswordResetRequest request) {
+    UserEntity user = getUser(request.phone());
+
+    otpService.getAndValidateOtp(request.code(), request.phone());
+
+    user.setPassword(passwordEncoder.encode(request.newPassword()));
+
+    userRepository.save(user);
   }
 }

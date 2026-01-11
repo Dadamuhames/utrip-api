@@ -10,4 +10,5 @@ public record TourFilterRequest(
     BigDecimal priceFrom,
     BigDecimal priceTo,
     Long agencyId,
-    Long categoryId) {}
+    Long categoryId,
+    Long regionId) {}

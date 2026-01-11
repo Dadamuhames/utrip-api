@@ -21,4 +21,8 @@ public interface ReviewRepository extends JpaRepository<ReviewEntity, Long> {
           + "LEFT JOIN FETCH r.user u "
           + "WHERE r.agency.id = :agencyId")
   Page<ReviewEntity> findAllByAgencyId(@Param("agencyId") Long agencyId, Pageable pageable);
+
+  @Query(
+      "SELECT COUNT(r.id) > 0 FROM ReviewEntity r WHERE r.agency.id = :agencyId AND r.user.id = :userId")
+  boolean existsByUserIdAndAgencyId(@Param("agencyId") Long agencyId, @Param("userId") Long userId);
 }

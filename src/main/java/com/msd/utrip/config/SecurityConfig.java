@@ -43,7 +43,7 @@ public class SecurityConfig {
                 auth.requestMatchers(
                         "/api/v1/webhook/telegram",
                         "/api/v1/client/auth/**",
-                        "/api/v1/agency/auth/**")
+                        "/api/v1/agency/auth/**", "/api/v1/files/**")
                     .permitAll()
                     .requestMatchers("/api/v1/client/**")
                     .hasRole("USER")

@@ -9,7 +9,7 @@ public record UserRegisterRequest(
     @NotBlank String phone,
     @NotBlank String password,
     @NotBlank String passwordConfirm,
-    @NotBlank @Size(min = 5, max = 5) String otpCode) {
+    @NotBlank @Size(min = 5, max = 5) String code) {
 
   @AssertTrue(message = "Passwords should match")
   private boolean isPasswordsMatch() {

@@ -1,10 +1,13 @@
 package com.msd.utrip.mapper;
 
-import com.msd.utrip.dto.response.ImageDto;
-import com.msd.utrip.dto.response.InclusionDto;
-import com.msd.utrip.dto.response.ScheduleDto;
-import com.msd.utrip.dto.response.TourDetailResponse;
-import com.msd.utrip.dto.response.TourResponse;
+import com.msd.utrip.dto.response.agency.AgencyTourResponse;
+import com.msd.utrip.dto.response.file.ImageDto;
+import com.msd.utrip.dto.response.tour.InclusionDto;
+import com.msd.utrip.dto.response.tour.ScheduleDto;
+import com.msd.utrip.dto.response.tour.TourDetailResponse;
+import com.msd.utrip.dto.response.tour.TourDetailResponseForAgency;
+import com.msd.utrip.dto.response.tour.TourResponse;
+import com.msd.utrip.repository.projection.AgencyTourProjection;
 import com.msd.utrip.repository.projection.InclusionProjection;
 import com.msd.utrip.repository.projection.ScheduleProjection;
 import com.msd.utrip.repository.projection.TourDetailProjection;
@@ -25,6 +28,9 @@ public abstract class TourMapper {
   @Mapping(target = "agency.reviewCount", expression = "java(tourProjection.getReviewCount())")
   public abstract TourResponse projectionToResponse(TourProjection tourProjection);
 
+  public abstract AgencyTourResponse agencyProjectionToResponse(
+      AgencyTourProjection tourProjection);
+
   @Mapping(
       target = "agency",
       expression =
@@ -35,6 +41,12 @@ public abstract class TourMapper {
               + "tourProjection.getRating(), "
               + "tourProjection.getReviewCount()))")
   public abstract TourDetailResponse projectionToDetailResponse(
+      final TourDetailProjection tourProjection,
+      final List<ScheduleDto> schedules,
+      final List<InclusionDto> inclusions,
+      final List<ImageDto> images);
+
+  public abstract TourDetailResponseForAgency projectionToDetailResponseForAgency(
       final TourDetailProjection tourProjection,
       final List<ScheduleDto> schedules,
       final List<InclusionDto> inclusions,

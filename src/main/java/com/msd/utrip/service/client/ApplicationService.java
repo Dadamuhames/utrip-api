@@ -2,7 +2,7 @@ package com.msd.utrip.service.client;
 
 import com.msd.utrip.dto.request.ApplicationRequest;
 import com.msd.utrip.entity.ApplicationEntity;
-import com.msd.utrip.entity.TourEntity;
+import com.msd.utrip.entity.tour.TourEntity;
 import com.msd.utrip.entity.user.UserEntity;
 import com.msd.utrip.mapper.ApplicationMapper;
 import com.msd.utrip.repository.ApplicationRepository;

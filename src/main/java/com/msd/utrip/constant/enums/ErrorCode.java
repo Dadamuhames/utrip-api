@@ -13,7 +13,7 @@ public enum ErrorCode {
   INTERNAL_TIMEOUT_ERROR_CODE(10007, "Internal timeout"),
   METHOD_NOT_SUPPORTED_ERROR_CODE(10008, "Method not supported"),
   MISSING_REQUEST_HEADER_ERROR_CODE(10009, "Missing request header"),
-  USER_INVALID_CODE(10010, "User invalid"),
+  LOGIN_INVALID_CODE(10010, "Login invalid"),
   ROLE_NOT_SUPPORTED_CODE(10011, "Provided Role not supported by the system"),
   JWT_INVALID_CODE(10012, "JWT invalid"),
   LOGIN_OR_TAX_NUMBER_EXISTS_CODE(10013, "Login or tax number already in use"),
@@ -23,7 +23,9 @@ public enum ErrorCode {
   ENTITY_NOT_FOUND_CODE(10404, "Entity not found"),
   TOUR_NOT_FOUND_OR_FULL_CODE(10404, "Tour id invalid or all places are full"),
   TABLE_NOT_AVAILABLE_CODE(10018, "Table not available"),
-  INVALID_MEAL_ID_PROVIDED_CODE(10019, "Invalid meal id provided in the list");
+  INVALID_MEAL_ID_PROVIDED_CODE(10019, "Invalid meal id provided in the list"),
+  INVALID_AGENCY_TO_REVIEW(10020, "This user cannot leave review for this agency"),
+  FILE_UPLOAD_EXCEPTION(10021, "File upload failed");
 
   final int code;
   final String message;
