@@ -7,7 +7,6 @@ build/
 
 .env
 .DS_Store
-
 logs/
 
 ### STS ###

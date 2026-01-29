@@ -43,7 +43,7 @@ public class AgencyEntity extends BaseDeactivatableEntity implements CustomUserD
 
   @Override
   public Role getUserRole() {
-    return Role.USER;
+    return Role.AGENCY;
   }
 
   @Override

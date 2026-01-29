@@ -1,18 +1,24 @@
 package com.msd.utrip.controller.agency;
 
 import com.msd.utrip.dto.request.AgencyTourFilterRequest;
+import com.msd.utrip.dto.request.TourCreateRequest;
 import com.msd.utrip.dto.response.agency.AgencyTourResponse;
 import com.msd.utrip.dto.response.tour.TourDetailResponseForAgency;
 import com.msd.utrip.entity.agency.AgencyEntity;
+import com.msd.utrip.service.agency.AgencyTourService;
 import com.msd.utrip.service.agency.AgencyTourViewService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,6 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1/agency/tours")
 public class AgencyTourController {
   private final AgencyTourViewService tourViewService;
+  private final AgencyTourService tourService;
 
   @GetMapping
   public ResponseEntity<Page<AgencyTourResponse>> list(
@@ -45,4 +52,17 @@ public class AgencyTourController {
 
     return ResponseEntity.ok(response);
   }
+
+  @PostMapping
+  public ResponseEntity<Void> createTour(
+      @RequestBody @Valid final TourCreateRequest request,
+      @AuthenticationPrincipal AgencyEntity agency) {
+
+    tourService.createTour(request, agency);
+
+    return new ResponseEntity<>(HttpStatus.CREATED);
+  }
+
+
+
 }

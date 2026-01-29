@@ -7,17 +7,18 @@ import lombok.Getter;
 import org.springframework.data.redis.core.RedisHash;
 import org.springframework.data.redis.core.index.Indexed;
 
+import java.time.LocalDateTime;
+
 @Getter
 @Builder
 @AllArgsConstructor
-@RedisHash(value = "otpEntity", timeToLive = 3600)
-public class OtpEntity {
+@RedisHash(value = "savedTours")
+public class SavedTourEntity {
+  @Id private Long id;
 
-    @Id private Long id;
+  @Indexed private Long userId;
 
-  @Indexed private Long telegramId;
+  private Long tourId;
 
-  @Indexed private String phone;
-
-  private String otpHash;
+  private LocalDateTime createdAt;
 }

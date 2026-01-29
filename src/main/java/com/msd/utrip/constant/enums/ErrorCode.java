@@ -25,7 +25,9 @@ public enum ErrorCode {
   TABLE_NOT_AVAILABLE_CODE(10018, "Table not available"),
   INVALID_MEAL_ID_PROVIDED_CODE(10019, "Invalid meal id provided in the list"),
   INVALID_AGENCY_TO_REVIEW(10020, "This user cannot leave review for this agency"),
-  FILE_UPLOAD_EXCEPTION(10021, "File upload failed");
+  FILE_UPLOAD_EXCEPTION(10021, "File upload failed"),
+  CATEGORY_INVALID_EXCEPTION(10022, "Category invalid"),
+  REGION_INVALID_EXCEPTION(10023, "Region invalid");
 
   final int code;
   final String message;

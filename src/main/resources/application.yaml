@@ -11,13 +11,19 @@ spring:
 
   # JPA configuration
   datasource:
-    url: jdbc:postgresql://localhost:5432/utrip_db
-    username: mark
-    password: root_pass
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
     driver-class-name: org.postgresql.Driver
     tomcat:
       test-on-borrow: true
       validation-query: SELECT 1
+
+  data:
+    redis:
+      host: ${SPRING_DATA_REDIS_HOST:redis}
+      port: ${SPRING_DATA_REDIS_PORT:6379}
+      password: ${SPRING_DATA_REDIS_PASSWORD}
 
   jpa:
     hibernate:
@@ -53,21 +59,20 @@ server:
 
 telegram:
   bot:
-    token: "7842494007:AAGfrUvghIeZY1gDUrcFzXFEWFzH31MkBlE"
-    webhookUrl: "https://d9e8c077a431.ngrok-free.app/api/v1/webhook/telegram"
-    webhookPath: "/api/v1/webhook/telegram"
-    secret: "secret"
+    token: ${TELEGRAM_BOT_TOKEN}
+    webhookUrl: ${TELEGRAM_WEBHOOK_URL}
+    webhookPath: /api/v1/webhook/telegram
+    secret: ${TELEGRAM_SECRET}
 
 logging:
   config: classpath:log4j2.yml
 
 jwt:
-  secret-key: "4b86333279995c2cf2a0595e4deead09528d2c81050021b1c76a52b95ac533f6"
-  access-ttl: 900000
-  refresh-ttl: 900000
-
+  secret-key: ${JWT_SECRET_KEY}
+  access-ttl: 90000000
+  refresh-ttl: 90000000
 
 minio:
-  endpoint: http://localhost:9000
-  accessKey: "minioadmin"
-  secretKey: "minioadmin"
+  endpoint: ${MINIO_ENDPOINT}
+  accessKey: ${MINIO_ACCESS_KEY}
+  secretKey: ${MINIO_SECRET_KEY}

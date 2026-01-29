@@ -24,7 +24,7 @@ public class InclusionEntity extends BaseEntity {
   })
   private MultiLanguageText title;
 
-  @Builder.Default private Boolean isIncluded = true;
+  @Builder.Default private boolean isIncluded = true;
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "tour_id", updatable = false, nullable = false)

@@ -21,7 +21,7 @@ public class AgencyAuthService {
   private final PasswordEncoder passwordEncoder;
 
 
-  @Transactional(readOnly = true)
+  @Transactional
   public TokenResponse login(final AgencyLoginRequest request) {
     AgencyEntity agency =
         agencyRepository

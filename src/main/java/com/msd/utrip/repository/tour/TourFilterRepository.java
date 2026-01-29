@@ -33,7 +33,8 @@ public class TourFilterRepository {
           + "t.end_date AS endDate, "
           + "a.id AS agencyId, "
           + "a.name AS agencyName, "
-          + "a.image AS agencyImage, t.createdAt AS createdAt "
+          + "a.image AS agencyImage, "
+          + "t.created_at AS createdAt, "
           + "COALESCE(AVG(r.rating), 0.0) AS rating, "
           + "COUNT(DISTINCT r.id) AS reviewCount "
           + "FROM postgres.tours t "
@@ -41,7 +42,7 @@ public class TourFilterRepository {
           + "LEFT JOIN postgres.reviews r ON r.agency_id = a.id ";
 
   private final String groupBy =
-      " GROUP BY t.id, t.title, t.address, t.price, t.start_date, t.end_date, a.id, a.name, a.image, i.image, a.createdAt ";
+      " GROUP BY t.id, t.title, t.address, t.image, t.price, t.start_date, t.end_date, a.id, a.name, a.image, t.created_at ";
 
   private final String pagination = " ORDER BY t.id LIMIT :limit OFFSET :offset";
 
@@ -54,13 +55,13 @@ public class TourFilterRepository {
           + "t.price AS price, "
           + "t.start_date AS startDate, "
           + "t.end_date AS endDate,  "
-          + "t.createdAt AS createdAt, "
+          + "t.created_at AS createdAt, "
           + "COUNT(apl.id) AS applicationCount "
           + "FROM postgres.tours t "
           + "LEFT JOIN postgres.applications apl ON apl.tour_id = t.id ";
 
   private final String groupByForAgency =
-      " GROUP BY t.id, t.title, t.address, t.price, t.start_date, t.end_date, i.image, a.createdAt, applicationCount ";
+      " GROUP BY t.id, t.title, t.address, t.price, t.start_date, t.end_date, i.image, t.created_at, applicationCount ";
 
   private String getFilterQuery(String whereClause) {
     return queryStart + whereClause + groupBy + pagination;
