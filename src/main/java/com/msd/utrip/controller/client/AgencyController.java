@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +22,7 @@ public class AgencyController {
   private final ClientAgencyService agencyService;
 
   @GetMapping
+  @PreAuthorize("permitAll()")
   public ResponseEntity<Page<AgencySimpleResponse>> list(
       @RequestParam(defaultValue = "") String search,
       @RequestParam(defaultValue = "0") Integer page,
@@ -34,6 +36,7 @@ public class AgencyController {
   }
 
   @GetMapping("/{id}")
+  @PreAuthorize("permitAll()")
   public ResponseEntity<AgencyDetailResponse> one(@PathVariable final Long id) {
     AgencyDetailResponse response = agencyService.getOne(id);
 

@@ -1,6 +1,5 @@
 package com.msd.utrip.entity.user;
 
-import com.msd.utrip.constant.enums.Gender;
 import com.msd.utrip.constant.enums.Role;
 import com.msd.utrip.entity.base.BaseDeactivatableEntity;
 import com.msd.utrip.entity.base.CustomUserDetails;
@@ -10,8 +9,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-
-import java.time.LocalDate;
 
 @Entity
 @Getter

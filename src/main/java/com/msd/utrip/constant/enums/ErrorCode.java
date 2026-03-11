@@ -13,21 +13,26 @@ public enum ErrorCode {
   INTERNAL_TIMEOUT_ERROR_CODE(10007, "Internal timeout"),
   METHOD_NOT_SUPPORTED_ERROR_CODE(10008, "Method not supported"),
   MISSING_REQUEST_HEADER_ERROR_CODE(10009, "Missing request header"),
-  LOGIN_INVALID_CODE(10010, "Login invalid"),
-  ROLE_NOT_SUPPORTED_CODE(10011, "Provided Role not supported by the system"),
-  JWT_INVALID_CODE(10012, "JWT invalid"),
-  LOGIN_OR_TAX_NUMBER_EXISTS_CODE(10013, "Login or tax number already in use"),
-  REFRESH_TOKEN_INVALID_CODE(10014, "Refresh token invalid"),
-  OTP_EXPIRED_CODE(10015, "OTP invalid"),
-  PASSWORD_INVALID_CODE(10016, "Password invalid"),
-  ENTITY_NOT_FOUND_CODE(10404, "Entity not found"),
-  TOUR_NOT_FOUND_OR_FULL_CODE(10404, "Tour id invalid or all places are full"),
-  TABLE_NOT_AVAILABLE_CODE(10018, "Table not available"),
-  INVALID_MEAL_ID_PROVIDED_CODE(10019, "Invalid meal id provided in the list"),
-  INVALID_AGENCY_TO_REVIEW(10020, "This user cannot leave review for this agency"),
-  FILE_UPLOAD_EXCEPTION(10021, "File upload failed"),
-  CATEGORY_INVALID_EXCEPTION(10022, "Category invalid"),
-  REGION_INVALID_EXCEPTION(10023, "Region invalid");
+  RESOURCE_NOT_FOUND(10010, "Resource not found"),
+
+  LOGIN_INVALID_CODE(10110, "Login invalid"),
+  ROLE_NOT_SUPPORTED_CODE(10111, "Provided Role not supported by the system"),
+  JWT_INVALID_CODE(10112, "JWT invalid"),
+  LOGIN_EXISTS_CODE(10113, "Login or tax number already in use"),
+  REFRESH_TOKEN_INVALID_CODE(10114, "Refresh token invalid"),
+  OTP_EXPIRED_CODE(10115, "OTP invalid"),
+  PASSWORD_INVALID_CODE(10116, "Password invalid"),
+  ENTITY_NOT_FOUND_CODE(10117, "Entity not found"),
+  TOUR_NOT_FOUND_OR_FULL_CODE(10118, "Tour id invalid or all places are full"),
+  TABLE_NOT_AVAILABLE_CODE(10118, "Table not available"),
+  INVALID_MEAL_ID_PROVIDED_CODE(10120, "Invalid meal id provided in the list"),
+  INVALID_AGENCY_TO_REVIEW(10121, "This user cannot leave review for this agency"),
+  FILE_UPLOAD_EXCEPTION(10122, "File upload failed"),
+  CATEGORY_INVALID_EXCEPTION(10123, "Category invalid"),
+  COUNTRY_INVALID_EXCEPTION(10124, "Country invalid"),
+  REGION_INVALID_EXCEPTION(10125, "Region invalid"),
+
+  ADMIN_LOGIN_INVALID(10125, "Admin login invalid");
 
   final int code;
   final String message;

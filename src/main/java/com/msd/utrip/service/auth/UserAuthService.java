@@ -1,9 +1,9 @@
 package com.msd.utrip.service.auth;
 
 import com.msd.utrip.constant.enums.ErrorCode;
-import com.msd.utrip.dto.request.PasswordResetRequest;
-import com.msd.utrip.dto.request.UserLoginRequest;
-import com.msd.utrip.dto.request.UserRegisterRequest;
+import com.msd.utrip.dto.request.user.PasswordResetRequest;
+import com.msd.utrip.dto.request.user.UserLoginRequest;
+import com.msd.utrip.dto.request.user.UserRegisterRequest;
 import com.msd.utrip.dto.response.TokenResponse;
 import com.msd.utrip.entity.redis.OtpEntity;
 import com.msd.utrip.entity.user.UserEntity;

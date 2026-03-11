@@ -1,7 +1,7 @@
 package com.msd.utrip.controller.client;
 
 import com.msd.utrip.dto.request.ApplicationRequest;
-import com.msd.utrip.dto.request.TourFilterRequest;
+import com.msd.utrip.dto.request.tour.TourFilterRequest;
 import com.msd.utrip.dto.response.tour.TourDetailResponse;
 import com.msd.utrip.dto.response.tour.TourResponse;
 import com.msd.utrip.entity.user.UserEntity;
@@ -14,6 +14,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,6 +32,7 @@ public class ClientTourController {
   private final ApplicationService applicationService;
 
   @GetMapping
+  @PreAuthorize("permitAll()")
   public ResponseEntity<Page<TourResponse>> list(
       final TourFilterRequest filter,
       @RequestParam(defaultValue = "0") Integer page,
@@ -43,6 +45,7 @@ public class ClientTourController {
     return ResponseEntity.ok(tours);
   }
 
+  @PreAuthorize("permitAll()")
   @GetMapping("/{id}")
   public ResponseEntity<TourDetailResponse> getOne(@PathVariable final Long id) {
     TourDetailResponse response = clientTourService.one(id);
@@ -50,6 +53,7 @@ public class ClientTourController {
     return ResponseEntity.ok(response);
   }
 
+  @PreAuthorize("hasRole('USER')")
   @PostMapping("/{id}/application")
   public ResponseEntity<Void> apply(
       @PathVariable final Long id,

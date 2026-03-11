@@ -1,8 +1,8 @@
 package com.msd.utrip.controller.client;
 
-import com.msd.utrip.dto.request.PasswordResetRequest;
-import com.msd.utrip.dto.request.UserLoginRequest;
-import com.msd.utrip.dto.request.UserRegisterRequest;
+import com.msd.utrip.dto.request.user.PasswordResetRequest;
+import com.msd.utrip.dto.request.user.UserLoginRequest;
+import com.msd.utrip.dto.request.user.UserRegisterRequest;
 import com.msd.utrip.dto.response.TokenResponse;
 import com.msd.utrip.service.auth.UserAuthService;
 import jakarta.validation.Valid;

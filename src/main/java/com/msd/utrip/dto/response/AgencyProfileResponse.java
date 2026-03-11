@@ -1,7 +1,7 @@
 package com.msd.utrip.dto.response;
 
 import java.time.LocalDateTime;
-import java.time.OffsetDateTime;
+import java.time.LocalDateTime;
 import java.util.Map;
 
 public record AgencyProfileResponse(
@@ -13,4 +13,4 @@ public record AgencyProfileResponse(
     String address,
     Map<String, String> subtitle,
     Map<String, String> info,
-   OffsetDateTime createdAt) {}
+   LocalDateTime createdAt) {}

@@ -6,7 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
-import java.time.OffsetDateTime;
+import java.time.LocalDateTime;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -33,10 +33,10 @@ public class BaseEntity {
 
     @CreationTimestamp
     @Column(updatable = false, nullable = false)
-    OffsetDateTime createdAt;
+    LocalDateTime createdAt;
 
     @UpdateTimestamp
     @Column(nullable = false)
-    OffsetDateTime updatedAt;
+    LocalDateTime updatedAt;
 }
 

@@ -1,7 +1,7 @@
 package com.msd.utrip.controller.agency;
 
-import com.msd.utrip.dto.request.AgencyTourFilterRequest;
-import com.msd.utrip.dto.request.TourCreateRequest;
+import com.msd.utrip.dto.request.agency.AgencyTourFilterRequest;
+import com.msd.utrip.dto.request.tour.TourCreateRequest;
 import com.msd.utrip.dto.response.agency.AgencyTourResponse;
 import com.msd.utrip.dto.response.tour.TourDetailResponseForAgency;
 import com.msd.utrip.entity.agency.AgencyEntity;
@@ -62,7 +62,4 @@ public class AgencyTourController {
 
     return new ResponseEntity<>(HttpStatus.CREATED);
   }
-
-
-
 }

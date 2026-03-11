@@ -1,8 +1,8 @@
 package com.msd.utrip.mapper;
 
-import com.msd.utrip.dto.request.InclusionRequestDto;
-import com.msd.utrip.dto.request.ScheduleRequestDto;
-import com.msd.utrip.dto.request.TourCreateRequest;
+import com.msd.utrip.dto.request.tour.InclusionRequestDto;
+import com.msd.utrip.dto.request.tour.ScheduleRequestDto;
+import com.msd.utrip.dto.request.tour.TourCreateRequest;
 import com.msd.utrip.dto.response.agency.AgencyTourResponse;
 import com.msd.utrip.dto.response.file.ImageDto;
 import com.msd.utrip.dto.response.tour.InclusionDto;

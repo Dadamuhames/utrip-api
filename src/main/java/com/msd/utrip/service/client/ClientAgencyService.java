@@ -11,7 +11,7 @@ import com.msd.utrip.mapper.ImageMapper;
 import com.msd.utrip.repository.agency.AgencyImageRepository;
 import com.msd.utrip.repository.agency.AgencyRepository;
 import com.msd.utrip.repository.agency.AgencyVideoRepository;
-import com.msd.utrip.repository.projection.AgencyDetailProjection;
+import com.msd.utrip.repository.projection.AgencyDetailProjectionForClient;
 import com.msd.utrip.repository.projection.AgencyProjection;
 import com.msd.utrip.service.LanguageExtractService;
 import java.util.List;
@@ -44,8 +44,8 @@ public class ClientAgencyService {
   public AgencyDetailResponse getOne(final Long id) {
     String lang = languageExtractService.getCurrentLanguage();
 
-    AgencyDetailProjection detailProjection =
-        agencyRepository.findByIdLocalized(id, lang).orElseThrow(EntityNotFoundException::new);
+    AgencyDetailProjectionForClient detailProjection =
+        agencyRepository.findByIdLocalizedForClient(id, lang).orElseThrow(EntityNotFoundException::new);
 
     Pageable filePagination = PageRequest.of(0, 20);
 

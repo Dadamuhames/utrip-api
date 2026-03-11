@@ -34,7 +34,9 @@ public class AgencyEntity extends BaseDeactivatableEntity implements CustomUserD
   private String image;
 
   @AttributeOverrides({
-      @AttributeOverride(name = "texts", column = @Column(name = "subtitle", columnDefinition = "jsonb"))
+    @AttributeOverride(
+        name = "texts",
+        column = @Column(name = "subtitle", columnDefinition = "jsonb"))
   })
   private MultiLanguageText subtitle;
 

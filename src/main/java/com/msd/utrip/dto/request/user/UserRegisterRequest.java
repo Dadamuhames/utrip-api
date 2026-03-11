@@ -1,4 +1,4 @@
-package com.msd.utrip.dto.request;
+package com.msd.utrip.dto.request.user;
 
 import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.NotBlank;

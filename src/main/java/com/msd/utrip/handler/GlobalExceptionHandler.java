@@ -21,10 +21,11 @@ import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.servlet.NoHandlerFoundException;
+import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 @Slf4j
 @RestControllerAdvice
-public class    GlobalExceptionHandler {
+public class GlobalExceptionHandler {
 
     @ExceptionHandler(ApplicationException.class)
     private ResponseEntity<ErrorResponse> handleApplicationException(final ApplicationException ex) {
@@ -145,4 +146,14 @@ public class    GlobalExceptionHandler {
 
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
     }
+
+    @ExceptionHandler(NoResourceFoundException.class)
+    private ResponseEntity<ErrorResponse> handleNotFoundException(NoResourceFoundException ex) {
+        log.error("NoResourceFoundException : {}", ex.getMessage(), ex);
+
+        var error = ErrorResponse.of(ErrorCode.RESOURCE_NOT_FOUND, ex.getMessage(), ErrorType.EXTERNAL);
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+    }
+
 }

@@ -1,4 +1,4 @@
-package com.msd.utrip.dto.request;
+package com.msd.utrip.dto.request.agency;
 
 import com.msd.utrip.validation.PhoneNumberConstraint;
 import jakarta.validation.constraints.NotBlank;
@@ -11,6 +11,7 @@ public record AgencyProfileRequest(
     @NotBlank String name,
     @NotNull @PhoneNumberConstraint String phone,
     Map<String, String> subtitle,
+    String image,
     String email,
     String address,
     Map<String, String> info,

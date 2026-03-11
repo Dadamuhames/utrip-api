@@ -6,7 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
-import java.time.OffsetDateTime;
+import java.time.LocalDateTime;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -34,11 +34,11 @@ public class BaseDeactivatableEntity {
 
     @CreationTimestamp
     @Column(updatable = false)
-    OffsetDateTime createdAt;
+    LocalDateTime createdAt;
 
     @UpdateTimestamp
     @Column(insertable = false)
-    OffsetDateTime updatedAt;
+    LocalDateTime updatedAt;
 
     @Builder.Default
     @Column(name = "is_active")

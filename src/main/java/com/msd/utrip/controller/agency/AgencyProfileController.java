@@ -1,8 +1,9 @@
 package com.msd.utrip.controller.agency;
 
-import com.msd.utrip.dto.request.AgencyProfileRequest;
+import com.msd.utrip.dto.request.agency.AgencyProfileRequest;
 import com.msd.utrip.dto.response.AgencyProfileResponse;
 import com.msd.utrip.dto.response.agency.AgencyDetailResponse;
+import com.msd.utrip.dto.response.agency.AgencyProfileDetailResponse;
 import com.msd.utrip.entity.agency.AgencyEntity;
 import com.msd.utrip.service.agency.AgencyProfileService;
 import jakarta.validation.Valid;
@@ -24,9 +25,10 @@ public class AgencyProfileController {
   private final AgencyProfileService agencyProfileService;
 
   @GetMapping
-  public ResponseEntity<AgencyDetailResponse> getProfile(
+  public ResponseEntity<AgencyProfileDetailResponse> getProfile(
       @AuthenticationPrincipal AgencyEntity agency) {
-    AgencyDetailResponse response = agencyProfileService.getProfile(agency);
+
+    AgencyProfileDetailResponse response = agencyProfileService.getProfile(agency);
 
     return ResponseEntity.ok(response);
   }

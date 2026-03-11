@@ -1,7 +1,7 @@
 package com.msd.utrip.service.client;
 
-import com.msd.utrip.dto.request.ReviewFilterRequest;
-import com.msd.utrip.dto.request.ReviewRequest;
+import com.msd.utrip.dto.request.tour.ReviewFilterRequest;
+import com.msd.utrip.dto.request.tour.ReviewRequest;
 import com.msd.utrip.dto.response.ReviewResponse;
 import com.msd.utrip.entity.ReviewEntity;
 import com.msd.utrip.entity.agency.AgencyEntity;

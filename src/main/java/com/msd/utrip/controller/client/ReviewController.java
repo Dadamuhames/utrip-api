@@ -1,7 +1,7 @@
 package com.msd.utrip.controller.client;
 
-import com.msd.utrip.dto.request.ReviewFilterRequest;
-import com.msd.utrip.dto.request.ReviewRequest;
+import com.msd.utrip.dto.request.tour.ReviewFilterRequest;
+import com.msd.utrip.dto.request.tour.ReviewRequest;
 import com.msd.utrip.dto.response.ReviewResponse;
 import com.msd.utrip.entity.user.UserEntity;
 import com.msd.utrip.service.client.ReviewService;
@@ -12,6 +12,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,6 +28,7 @@ public class ReviewController {
   private final ReviewService reviewService;
 
   @GetMapping
+  @PreAuthorize("permitAll()")
   public ResponseEntity<Page<ReviewResponse>> list(
       final ReviewFilterRequest filter,
       @RequestParam(defaultValue = "0") Integer page,
@@ -40,6 +42,7 @@ public class ReviewController {
   }
 
   @PostMapping
+  @PreAuthorize("hasRole('USER')")
   public ResponseEntity<Void> create(
       @Valid @RequestBody ReviewRequest request, @AuthenticationPrincipal UserEntity user) {
 

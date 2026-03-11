@@ -1,4 +1,4 @@
-package com.msd.utrip.controller;
+package com.msd.utrip.controller.file;
 
 import com.msd.utrip.dto.request.FileUploadRequest;
 import com.msd.utrip.dto.response.file.FileUploadResponse;

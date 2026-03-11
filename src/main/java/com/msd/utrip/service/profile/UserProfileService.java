@@ -1,9 +1,8 @@
 package com.msd.utrip.service.profile;
 
 import com.msd.utrip.constant.enums.ErrorCode;
-import com.msd.utrip.dto.request.UserProfileRequest;
+import com.msd.utrip.dto.request.user.UserProfileRequest;
 import com.msd.utrip.dto.response.UserProfileResponse;
-import com.msd.utrip.dto.response.UserResponse;
 import com.msd.utrip.entity.user.UserEntity;
 import com.msd.utrip.exception.PasswordInvalidException;
 import com.msd.utrip.mapper.UserMapper;

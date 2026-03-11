@@ -1,6 +1,6 @@
 package com.msd.utrip.service.agency;
 
-import com.msd.utrip.dto.request.AgencyTourFilterRequest;
+import com.msd.utrip.dto.request.agency.AgencyTourFilterRequest;
 import com.msd.utrip.dto.response.agency.AgencyTourResponse;
 import com.msd.utrip.dto.response.file.ImageDto;
 import com.msd.utrip.dto.response.tour.InclusionDto;

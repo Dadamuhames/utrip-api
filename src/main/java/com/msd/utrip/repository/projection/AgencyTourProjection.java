@@ -2,24 +2,30 @@ package com.msd.utrip.repository.projection;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.OffsetDateTime;
+import java.time.LocalDateTime;
 
-public interface AgencyTourProjection {
-  Long getId();
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-  String getTitle();
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
-  String getAddress();
-
-  String getImage();
-
-  BigDecimal getPrice();
-
-  LocalDate getStartDate();
-
-  LocalDate getEndDate();
-
-  Integer getApplicationCount();
-
-  OffsetDateTime getCreatedAt();
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class AgencyTourProjection {
+  private Long id;
+  private String title;
+  private String address;
+  private String image;
+  private BigDecimal price;
+  private LocalDate startDate;
+  private LocalDate endDate;
+  private Integer applicationCount;
+  private LocalDateTime createdAt;
 }

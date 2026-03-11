@@ -15,8 +15,8 @@ public interface TourRepository extends JpaRepository<TourEntity, Long> {
           "SELECT t.id AS id, "
               + "COALESCE(t.title->>:lang, t.title->>'ru', '') AS title, "
               + "t.address AS address, "
-              + "t.date_from AS date_from, "
-              + "t.date_to AS date_to, "
+              + "t.start_date AS date_from, "
+              + "t.end_date AS date_to, "
               + "t.max_people AS max_places, "
               + "t.max_people - COALESCE(COUNT(DISTINCT app.id), 0) AS places_left, "
               + "t.price AS price, "
@@ -32,7 +32,7 @@ public interface TourRepository extends JpaRepository<TourEntity, Long> {
               + "LEFT JOIN postgres.reviews r ON r.agency_id = a.id "
               + "LEFT JOIN postgres.applications app ON app.tour_id = t.id "
               + "WHERE t.id = :id "
-              + "GROUP BY t.id, t.title, t.address, t.date_from, t.date_to, t.max_people, "
+              + "GROUP BY t.id, t.title, t.address, t.start_date, t.end_date, t.max_people, "
               + "t.price, t.info, t.additional_info, a.id, a.name, a.image",
       nativeQuery = true)
   Optional<TourDetailProjection> findByIdLocalized(
@@ -43,8 +43,8 @@ public interface TourRepository extends JpaRepository<TourEntity, Long> {
           "SELECT t.id AS id, "
               + "COALESCE(t.title->>:lang, t.title->>'ru', '') AS title, "
               + "t.address AS address, "
-              + "t.date_from AS date_from, "
-              + "t.date_to AS date_to, "
+              + "t.start_date AS date_from, "
+              + "t.end_date AS date_to, "
               + "t.max_people AS max_places, "
               + "t.max_people - COALESCE(COUNT(DISTINCT app.id), 0) AS places_left, "
               + "t.price AS price, "
@@ -53,11 +53,11 @@ public interface TourRepository extends JpaRepository<TourEntity, Long> {
               + "COALESCE(AVG(r.rating), 0.0) AS rating, "
               + "COUNT(DISTINCT r.id) AS review_count "
               + "FROM postgres.tours t "
-              + "LEFT JOIN postgres.reviews r ON r.agency_id = a.id "
+              + "LEFT JOIN postgres.reviews r ON r.agency_id = :agencyId "
               + "LEFT JOIN postgres.applications app ON app.tour_id = t.id "
-              + "WHERE t.id = :id AND t.agency_id = :agency_id "
-              + "GROUP BY t.id, t.title, t.address, t.date_from, t.date_to, t.max_people, "
-              + "t.price, t.info, t.additional_info, a.id, a.name, a.image",
+              + "WHERE t.id = :id AND t.agency_id = :agencyId "
+              + "GROUP BY t.id, t.title, t.address, t.start_date, t.end_date, t.max_people, "
+              + "t.price, t.info, t.additional_info",
       nativeQuery = true)
   Optional<TourDetailProjection> findByIdLocalizedForAgency(
       @Param("id") Long id, @Param("agencyId") Long agencyId, @Param("lang") String lang);
@@ -67,7 +67,7 @@ public interface TourRepository extends JpaRepository<TourEntity, Long> {
           "SELECT t.* FROM postgres.tours t "
               + "LEFT JOIN postgres.applications a ON a.tour_id = t.id "
               + "WHERE t.id = :id "
-              + "AND t.date_from > CURRENT_DATE "
+              + "AND t.start_date > CURRENT_DATE "
               + "GROUP BY t.id "
               + "HAVING COALESCE(COUNT(a.id), 0) + :personCount <= t.max_people",
       nativeQuery = true)

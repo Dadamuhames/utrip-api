@@ -1,7 +1,7 @@
 package com.msd.utrip.service.auth;
 
 import com.msd.utrip.constant.enums.ErrorCode;
-import com.msd.utrip.dto.request.AgencyLoginRequest;
+import com.msd.utrip.dto.request.agency.LoginRequest;
 import com.msd.utrip.dto.response.TokenResponse;
 import com.msd.utrip.entity.agency.AgencyEntity;
 import com.msd.utrip.exception.PasswordInvalidException;
@@ -22,7 +22,7 @@ public class AgencyAuthService {
 
 
   @Transactional
-  public TokenResponse login(final AgencyLoginRequest request) {
+  public TokenResponse login(final LoginRequest request) {
     AgencyEntity agency =
         agencyRepository
             .findByLogin(request.login())

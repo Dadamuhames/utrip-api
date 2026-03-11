@@ -1,9 +1,10 @@
 package com.msd.utrip.mapper;
 
-import com.msd.utrip.dto.request.UserProfileRequest;
-import com.msd.utrip.dto.request.UserRegisterRequest;
+import com.msd.utrip.dto.request.user.UserProfileRequest;
+import com.msd.utrip.dto.request.user.UserRegisterRequest;
 import com.msd.utrip.dto.response.UserProfileResponse;
 import com.msd.utrip.dto.response.UserResponse;
+import com.msd.utrip.dto.response.admin.UserAdminResponse;
 import com.msd.utrip.entity.user.UserEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -26,4 +27,7 @@ public abstract class UserMapper {
   @Mapping(target = "password", ignore = true)
   @Mapping(target = "telegramId", ignore = true)
   public abstract void updateProfile(UserProfileRequest request, @MappingTarget UserEntity user);
+
+
+  public abstract UserAdminResponse entityToAdminResponse(UserEntity entity);
 }

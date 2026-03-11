@@ -20,6 +20,4 @@ public interface AgencyDetailProjection {
   Integer getActiveToursCount();
 
   Integer getFinishedToursCount();
-
-  Integer getTotalParticipantsCount();
 }

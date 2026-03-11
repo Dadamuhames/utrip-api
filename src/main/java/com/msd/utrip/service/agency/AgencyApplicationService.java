@@ -6,6 +6,7 @@ import com.msd.utrip.entity.ApplicationEntity;
 import com.msd.utrip.entity.agency.AgencyEntity;
 import com.msd.utrip.mapper.ApplicationMapper;
 import com.msd.utrip.repository.ApplicationFilterRepository;
+import com.msd.utrip.repository.projection.ApplicationProjection;
 import com.msd.utrip.service.LanguageExtractService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -26,8 +27,8 @@ public class AgencyApplicationService {
 
     String lang = languageExtractService.getCurrentLanguage();
 
-    Page<ApplicationEntity> applications =
-        applicationFilterRepository.finaAllByAgency(filter, agency.getId(), pageable);
+    Page<ApplicationProjection> applications =
+        applicationFilterRepository.finaAllByAgency(lang, filter, agency.getId(), pageable);
 
     return applications.map(a -> applicationMapper.entityToResponse(a, lang));
   }

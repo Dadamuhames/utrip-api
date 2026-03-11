@@ -1,6 +1,6 @@
 package com.msd.utrip.mapper;
 
-import com.msd.utrip.dto.request.ReviewRequest;
+import com.msd.utrip.dto.request.tour.ReviewRequest;
 import com.msd.utrip.dto.response.ReviewResponse;
 import com.msd.utrip.entity.ReviewEntity;
 import com.msd.utrip.entity.agency.AgencyEntity;

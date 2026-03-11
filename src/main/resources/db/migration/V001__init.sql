@@ -5,7 +5,7 @@ CREATE TABLE users (
     phone VARCHAR(12) NOT NULL,
     image VARCHAR(255),
     telegram_id BIGINT NOT NULL,
-    password VARCHAR(80) NOT NULL,
+    password TEXT NOT NULL,
     is_active boolean default true,
 
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -130,7 +130,7 @@ CREATE TABLE tours (
     subtitle JSONB NOT NULL,
     address TEXT,
     max_people INTEGER NOT NULL,
-    price NUMERIC(8, 2) NOT NULL,
+    price NUMERIC(16, 2) NOT NULL,
     info JSONB DEFAULT '{}'::JSONB,
     additional_info JSONB DEFAULT '{}'::JSONB,
     start_date DATE NOT NULL,
@@ -207,7 +207,7 @@ CREATE TABLE applications (
    phone VARCHAR(12) NOT NULL,
    email VARCHAR(255) NOT NULL,
    person_count INTEGER NOT NULL CHECK(person_count > 0),
-   total_price NUMERIC(8, 2) NOT NULL,
+   total_price NUMERIC(16, 2) NOT NULL,
    status application_status NOT NULL DEFAULT 'NEW',
 
    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,

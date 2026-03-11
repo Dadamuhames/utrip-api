@@ -1,6 +1,6 @@
 package com.msd.utrip.controller.agency;
 
-import com.msd.utrip.dto.request.AgencyLoginRequest;
+import com.msd.utrip.dto.request.agency.LoginRequest;
 import com.msd.utrip.dto.response.TokenResponse;
 import com.msd.utrip.service.auth.AgencyAuthService;
 import jakarta.validation.Valid;
@@ -18,7 +18,7 @@ public class AgencyAuthController {
   private final AgencyAuthService agencyAuthService;
 
   @PostMapping("/login")
-  public ResponseEntity<TokenResponse> login(@Valid @RequestBody AgencyLoginRequest request) {
+  public ResponseEntity<TokenResponse> login(@Valid @RequestBody LoginRequest request) {
     TokenResponse response = agencyAuthService.login(request);
 
     return ResponseEntity.ok(response);

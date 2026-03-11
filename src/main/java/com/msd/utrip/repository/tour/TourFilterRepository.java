@@ -1,8 +1,8 @@
 package com.msd.utrip.repository.tour;
 
 import com.msd.utrip.dto.WhereResult;
-import com.msd.utrip.dto.request.AgencyTourFilterRequest;
-import com.msd.utrip.dto.request.TourFilterRequest;
+import com.msd.utrip.dto.request.agency.AgencyTourFilterRequest;
+import com.msd.utrip.dto.request.tour.TourFilterRequest;
 import com.msd.utrip.repository.projection.AgencyTourProjection;
 import com.msd.utrip.repository.projection.TourProjection;
 import java.util.HashMap;
@@ -61,7 +61,7 @@ public class TourFilterRepository {
           + "LEFT JOIN postgres.applications apl ON apl.tour_id = t.id ";
 
   private final String groupByForAgency =
-      " GROUP BY t.id, t.title, t.address, t.price, t.start_date, t.end_date, i.image, t.created_at, applicationCount ";
+      " GROUP BY t.id, t.title, t.address, t.price, t.start_date, t.end_date, t.created_at ";
 
   private String getFilterQuery(String whereClause) {
     return queryStart + whereClause + groupBy + pagination;
@@ -175,9 +175,9 @@ public class TourFilterRepository {
     }
 
     if (!request.isActive()) {
-      where.append(" AND t.endDate < CURRENT_DATE ");
+      where.append(" AND t.end_date < CURRENT_DATE ");
     } else {
-      where.append(" AND t.endDate > CURRENT_DATE ");
+      where.append(" AND t.end_date > CURRENT_DATE ");
     }
 
     return new WhereResult(where.toString(), params);

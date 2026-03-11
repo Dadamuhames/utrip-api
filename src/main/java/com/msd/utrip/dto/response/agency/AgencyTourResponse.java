@@ -2,7 +2,7 @@ package com.msd.utrip.dto.response.agency;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.OffsetDateTime;
+import java.time.LocalDateTime;
 
 public record AgencyTourResponse(
     Long id,
@@ -13,4 +13,4 @@ public record AgencyTourResponse(
     LocalDate startDate,
     LocalDate endDate,
     Integer applicationCount,
-    OffsetDateTime createdAt) {}
+    LocalDateTime createdAt) {}

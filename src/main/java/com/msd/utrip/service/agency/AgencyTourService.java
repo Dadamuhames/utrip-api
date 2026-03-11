@@ -1,14 +1,13 @@
 package com.msd.utrip.service.agency;
 
 import com.msd.utrip.constant.enums.ErrorCode;
-import com.msd.utrip.dto.request.TourCreateRequest;
+import com.msd.utrip.dto.request.tour.TourCreateRequest;
 import com.msd.utrip.entity.agency.AgencyEntity;
 import com.msd.utrip.entity.tour.InclusionEntity;
 import com.msd.utrip.entity.tour.ScheduleEntity;
 import com.msd.utrip.entity.tour.TourEntity;
 import com.msd.utrip.entity.tour.TourImageEntity;
 import com.msd.utrip.exception.CategoryInvalidException;
-import com.msd.utrip.exception.EntityNotFoundException;
 import com.msd.utrip.exception.RegionInvalidException;
 import com.msd.utrip.mapper.TourMapper;
 import com.msd.utrip.repository.CategoryRepository;

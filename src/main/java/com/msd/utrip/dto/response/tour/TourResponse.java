@@ -4,7 +4,7 @@ import com.msd.utrip.dto.response.agency.AgencyResponse;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.OffsetDateTime;
+import java.time.LocalDateTime;
 
 public record TourResponse(
     Long id,
@@ -16,4 +16,4 @@ public record TourResponse(
     LocalDate endDate,
     AgencyResponse agency,
     Double rating,
-    OffsetDateTime createdAt) {}
+    LocalDateTime createdAt) {}

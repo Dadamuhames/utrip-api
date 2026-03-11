@@ -1,30 +1,29 @@
 package com.msd.utrip.service.agency;
 
-import com.msd.utrip.dto.request.AgencyProfileRequest;
+import com.msd.utrip.dto.request.agency.AgencyProfileRequest;
 import com.msd.utrip.dto.response.AgencyProfileResponse;
-import com.msd.utrip.dto.response.agency.AgencyDetailResponse;
+import com.msd.utrip.dto.response.agency.AgencyProfileDetailResponse;
 import com.msd.utrip.dto.response.file.ImageDto;
 import com.msd.utrip.entity.agency.AgencyEntity;
 import com.msd.utrip.entity.agency.AgencyImageEntity;
 import com.msd.utrip.entity.agency.AgencyInfoEntity;
 import com.msd.utrip.entity.agency.AgencyVideoEntity;
-import com.msd.utrip.entity.field.MultiLanguageText;
 import com.msd.utrip.exception.EntityNotFoundException;
 import com.msd.utrip.mapper.AgencyMapper;
 import com.msd.utrip.mapper.ImageMapper;
+import com.msd.utrip.repository.ApplicationRepository;
 import com.msd.utrip.repository.agency.AgencyImageRepository;
 import com.msd.utrip.repository.agency.AgencyInfoRepository;
 import com.msd.utrip.repository.agency.AgencyRepository;
 import com.msd.utrip.repository.agency.AgencyVideoRepository;
 import com.msd.utrip.repository.projection.AgencyDetailProjection;
 import com.msd.utrip.service.LanguageExtractService;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -34,17 +33,20 @@ public class AgencyProfileService {
   private final AgencyVideoRepository videoRepository;
   private final AgencyInfoRepository infoRepository;
   private final LanguageExtractService languageExtractService;
+  private final ApplicationRepository applicationRepository;
   private final ImageMapper imageMapper;
   private final AgencyMapper agencyMapper;
 
   @Transactional(readOnly = true)
-  public AgencyDetailResponse getProfile(final AgencyEntity agency) {
+  public AgencyProfileDetailResponse getProfile(final AgencyEntity agency) {
     String lang = languageExtractService.getCurrentLanguage();
 
     AgencyDetailProjection detailProjection =
         agencyRepository
             .findByIdLocalized(agency.getId(), lang)
             .orElseThrow(EntityNotFoundException::new);
+
+    Integer totalParticipantsCount = applicationRepository.countByAgencyId(agency.getId());
 
     Pageable filePagination = PageRequest.of(0, 20);
 
@@ -54,9 +56,11 @@ public class AgencyProfileService {
 
     List<AgencyVideoEntity> videos =
         videoRepository.findAllByAgencyId(agency.getId(), filePagination).getContent();
+
     List<ImageDto> videoDto = videos.stream().map(imageMapper::mapAgencyVideo).toList();
 
-    return agencyMapper.projectionToDetailResponse(detailProjection, imagesDto, videoDto);
+    return agencyMapper.projectionToProfileDetailResponse(
+        detailProjection, imagesDto, videoDto, totalParticipantsCount);
   }
 
   @Transactional(readOnly = true)
@@ -76,9 +80,7 @@ public class AgencyProfileService {
             .findByAgencyId(agency.getId())
             .orElse(AgencyInfoEntity.builder().agency(agency).build());
 
-    agency.setName(request.name());
-    agency.setSubtitle(new MultiLanguageText(request.subtitle()));
-
+    agencyMapper.updateAgency(request, agency);
     agencyMapper.updateAgencyInfo(request, info);
 
     agencyRepository.save(agency);

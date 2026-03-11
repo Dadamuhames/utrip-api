@@ -1,6 +1,6 @@
 package com.msd.utrip.service.client;
 
-import com.msd.utrip.dto.request.TourFilterRequest;
+import com.msd.utrip.dto.request.tour.TourFilterRequest;
 import com.msd.utrip.dto.response.file.ImageDto;
 import com.msd.utrip.dto.response.tour.InclusionDto;
 import com.msd.utrip.dto.response.tour.ScheduleDto;

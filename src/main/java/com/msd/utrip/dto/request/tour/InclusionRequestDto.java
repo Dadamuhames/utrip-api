@@ -1,4 +1,4 @@
-package com.msd.utrip.dto.request;
+package com.msd.utrip.dto.request.tour;
 
 import jakarta.validation.constraints.NotBlank;
 

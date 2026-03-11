@@ -8,10 +8,13 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface ApplicationRepository extends JpaRepository<ApplicationEntity, Long> {
 
-  @Query("SELECT a FROM ApplicationEntity a LEFT JOIN FETCH a.tour t WHERE t.agency.id = ?1")
-  Page<ApplicationEntity> findAllByAgencyId(Long agencyId, Pageable pageable);
+    @Query("SELECT a FROM ApplicationEntity a LEFT JOIN FETCH a.tour t WHERE t.agency.id = ?1")
+    Page<ApplicationEntity> findAllByAgencyId(Long agencyId, Pageable pageable);
 
-  @Query(
-      "SELECT a FROM ApplicationEntity a LEFT JOIN FETCH a.tour t WHERE t.agency.id = ?1 AND t.id = ?2")
-  Page<ApplicationEntity> findAllByAgencyIdAndTourId(Long agencyId, Long tourId, Pageable pageable);
+    @Query(
+        "SELECT a FROM ApplicationEntity a LEFT JOIN FETCH a.tour t WHERE t.agency.id = ?1 AND t.id = ?2")
+    Page<ApplicationEntity> findAllByAgencyIdAndTourId(Long agencyId, Long tourId, Pageable pageable);
+
+    @Query("SELECT COUNT(a) FROM ApplicationEntity a LEFT JOIN a.tour t WHERE t.agency.id = ?1")
+    int countByAgencyId(Long agencyId);
 }

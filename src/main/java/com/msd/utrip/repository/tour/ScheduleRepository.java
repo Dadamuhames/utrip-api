@@ -13,8 +13,9 @@ public interface ScheduleRepository extends JpaRepository<ScheduleEntity, Long> 
     @Query(
         value = "SELECT s.id AS id, " +
             "COALESCE(s.title->>:lang, s.title->>'ru', '') AS title, " +
-            "COALESCE(s.subtitle->>:lang, s.subtitle->>'ru', '') AS subtitle " +
-            "FROM schedules s WHERE s.tour_id = :tourId",
+            "COALESCE(s.subtitle->>:lang, s.subtitle->>'ru', '') AS subtitle," +
+            "s.day_number AS dayNumber " +
+            "FROM postgres.schedules s WHERE s.tour_id = :tourId",
         nativeQuery = true)
     List<ScheduleProjection> findByTourIdLocalized(
         @Param("tourId") Long tourId,

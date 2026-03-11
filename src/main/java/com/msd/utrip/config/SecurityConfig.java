@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -18,6 +19,7 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @Configuration
+@EnableMethodSecurity
 @RequiredArgsConstructor
 public class SecurityConfig {
   private final JwtAuthFilter jwtAuthFilter;
@@ -41,18 +43,26 @@ public class SecurityConfig {
         .authorizeHttpRequests(
             auth ->
                 auth.requestMatchers(
+                        "/swagger-ui/**",
+                        "/v3/api-docs/**",
                         "/api/v1/webhook/telegram",
                         "/api/v1/client/auth/**",
-                        "/api/v1/agency/auth/**", "/api/v1/files/**")
+                        "/api/v1/admin/auth/**",
+                        "/api/v1/agency/auth/**",
+                        "/api/v1/files/**")
                     .permitAll()
-                    .requestMatchers("/api/v1/client/**")
-                    .hasRole("USER")
+                    //                    .requestMatchers("/api/v1/client/profile",
+                    // "/api/v1/client/tours/**/application")
+                    //                    .hasRole("USER")
                     .requestMatchers("/api/v1/agency/**")
-                    .hasRole("AGENCY"))
+                    .hasRole("AGENCY")
+                    .requestMatchers("/api/v1/admin/**")
+                    .hasRole("ADMIN")
+                    .anyRequest()
+                    .permitAll())
         .csrf(AbstractHttpConfigurer::disable)
         .httpBasic(AbstractHttpConfigurer::disable)
         .formLogin(AbstractHttpConfigurer::disable)
-        .anonymous(AbstractHttpConfigurer::disable)
         .cors(cors -> cors.configurationSource(corsConfigurationSource()));
 
     return http.build();
